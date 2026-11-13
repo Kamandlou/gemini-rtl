@@ -21,5 +21,3 @@ A Chrome extension that adds automatic right-to-left text direction to [Gemini](
 ## Credits
 
 Made with Coffee & Love by Amir Hossein Kamandlou.
-
-The RTL behavior was adapted with reference to the ChatGPT RTL extension. Its supplied source archive included an MIT license; see [THIRD_PARTY_LICENSE](THIRD_PARTY_LICENSE).
