@@ -1,0 +1,131 @@
+/* Gemini RTL applies only to elements marked by this extension. */
+.gemini-code-math-ltr,
+.gemini-code-math-ltr * { direction: ltr !important; unicode-bidi: isolate !important; }
+pre.gemini-code-math-ltr, code-block.gemini-code-math-ltr,
+.code-block.gemini-code-math-ltr { text-align: left !important; }
+.gemini-code-math-enabled .gemini-rtl code:not(pre code):not(code-block code),
+.gemini-code-math-enabled .gemini-block-rtl code:not(pre code):not(code-block code) {
+  direction: ltr !important; unicode-bidi: isolate !important; display: inline-block;
+}
+.gemini-rtl, .gemini-block-rtl { direction: rtl !important; text-align: right !important; }
+.gemini-ltr, .gemini-block-ltr { direction: ltr !important; text-align: left !important; }
+.gemini-rtl :is(ol, ul), :is(ol, ul).gemini-rtl {
+  direction: rtl !important; padding-right: 1.75rem !important; padding-left: 0 !important;
+}
+blockquote.gemini-block-rtl { border-right: 4px solid currentColor !important; border-left: 0 !important; padding-right: 1rem !important; padding-left: 0 !important; }
+.ql-editor.gemini-rtl.ql-blank::before { right: 16px !important; left: auto !important; text-align: right !important; }
+/* --------------------------------------------------------------------------
+   5. Injected Buttons (Composer & Message Turn Actions)
+   -------------------------------------------------------------------------- */
+.gemini-rtl-composer-btn,
+button#gemini-rtl-composer-toggle {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 36px !important;
+  min-width: 36px !important;
+  height: 36px !important;
+  min-height: 36px !important;
+  padding: 0 !important;
+  margin: 0 4px !important;
+  border-radius: 50% !important;
+  background: transparent !important;
+  border: none !important;
+  cursor: pointer !important;
+  color: inherit !important;
+  opacity: 0.78 !important;
+  flex-shrink: 0 !important;
+  transition: opacity 0.15s ease, background-color 0.15s ease, color 0.15s ease !important;
+  user-select: none !important;
+}
+
+.gemini-rtl-composer-btn:hover,
+button#gemini-rtl-composer-toggle:hover {
+  opacity: 1 !important;
+  background-color: rgba(128, 128, 128, 0.16) !important;
+}
+
+.gemini-rtl-composer-btn.active,
+button#gemini-rtl-composer-toggle.active {
+  opacity: 1 !important;
+  color: #1a73e8 !important;
+  background-color: rgba(26, 115, 232, 0.14) !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  .gemini-rtl-composer-btn.active,
+  button#gemini-rtl-composer-toggle.active {
+    color: #8ab4f8 !important;
+    background-color: rgba(138, 180, 248, 0.16) !important;
+  }
+}
+
+.gemini-rtl-composer-btn svg,
+button#gemini-rtl-composer-toggle svg {
+  width: 20px !important;
+  height: 20px !important;
+  stroke: currentColor !important;
+  stroke-width: 2 !important;
+  display: block !important;
+  transition: transform 0.2s ease !important;
+}
+
+.gemini-rtl-composer-btn.is-rtl svg,
+button#gemini-rtl-composer-toggle.is-rtl svg {
+  transform: scaleX(-1) !important;
+}
+
+/* Message Action Turn RTL Button */
+.gemini-rtl-turn-btn,
+button.gemini-rtl-turn-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 32px !important;
+  min-width: 32px !important;
+  height: 32px !important;
+  min-height: 32px !important;
+  padding: 0 !important;
+  margin: 0 2px !important;
+  border-radius: 50% !important;
+  background: transparent !important;
+  border: none !important;
+  cursor: pointer !important;
+  color: inherit !important;
+  opacity: 0.72 !important;
+  flex-shrink: 0 !important;
+  transition: opacity 0.15s ease, background-color 0.15s ease, color 0.15s ease !important;
+  user-select: none !important;
+}
+
+.gemini-rtl-turn-btn:hover,
+button.gemini-rtl-turn-btn:hover {
+  opacity: 1 !important;
+  background-color: rgba(128, 128, 128, 0.16) !important;
+}
+
+.gemini-rtl-turn-btn.is-rtl,
+button.gemini-rtl-turn-btn.is-rtl {
+  opacity: 1 !important;
+  color: #1a73e8 !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  .gemini-rtl-turn-btn.is-rtl,
+  button.gemini-rtl-turn-btn.is-rtl {
+    color: #8ab4f8 !important;
+  }
+}
+
+.gemini-rtl-turn-btn svg,
+button.gemini-rtl-turn-btn svg {
+  width: 18px !important;
+  height: 18px !important;
+  display: block !important;
+  transition: transform 0.2s ease !important;
+}
+
+.gemini-rtl-turn-btn.is-rtl svg,
+button.gemini-rtl-turn-btn.is-rtl svg {
+  transform: scaleX(-1) !important;
+}

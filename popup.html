@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gemini RTL</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="popup-container">
+    <!-- Header -->
+    <header class="header">
+      <div class="brand">
+        <img src="icon48.png" alt="Gemini RTL Logo" class="brand-icon">
+        <div class="brand-text">
+          <h1 class="brand-title">Gemini RTL</h1>
+          <span class="brand-badge">v1.0</span>
+        </div>
+      </div>
+      <div class="status-indicator" id="statusIndicator" title="Extension Active">
+        <span class="status-dot"></span>
+        <span class="status-text">Active</span>
+      </div>
+    </header>
+
+    <!-- Settings Card -->
+    <section class="card settings-card">
+      <h2 class="section-title">Preferences</h2>
+
+      <div class="setting-item">
+        <div class="setting-info">
+          <span class="setting-label">Auto-detect responses</span>
+          <span class="setting-desc">Auto-align replies by majority language</span>
+        </div>
+        <label class="toggle-switch">
+          <input type="checkbox" id="toggleAutoResponse" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="setting-item">
+        <div class="setting-info">
+          <span class="setting-label">Auto-detect input</span>
+          <span class="setting-desc">Align prompt box as you type</span>
+        </div>
+        <label class="toggle-switch">
+          <input type="checkbox" id="toggleAutoInput" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="setting-item">
+        <div class="setting-info">
+          <span class="setting-label">Keep Code & Math LTR</span>
+          <span class="setting-desc">Isolate formulas, equations and code blocks</span>
+        </div>
+        <label class="toggle-switch">
+          <input type="checkbox" id="toggleForceCodeMath" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+    </section>
+
+    <!-- Keyboard Shortcuts Card -->
+    <section class="card shortcuts-card">
+      <h2 class="section-title">Keyboard Shortcuts</h2>
+      <ul class="shortcuts-list">
+        <li class="shortcut-item">
+          <span class="shortcut-desc">Switch to RTL</span>
+          <div class="keys">
+            <kbd>Ctrl</kbd>+<kbd>Right Shift</kbd>
+          </div>
+        </li>
+        <li class="shortcut-item">
+          <span class="shortcut-desc">Switch to LTR</span>
+          <div class="keys">
+            <kbd>Ctrl</kbd>+<kbd>Left Shift</kbd>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <span>Made with Coffee &amp; Love · Amir Hossein Kamandlou</span>
+    </footer>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

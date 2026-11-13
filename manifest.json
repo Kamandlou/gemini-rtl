@@ -1,0 +1,35 @@
+{
+  "manifest_version": 3,
+  "name": "Gemini RTL",
+  "version": "1.0",
+  "description": "Smart RTL and LTR support for Google Gemini with math and code isolation",
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "action": {
+    "default_icon": {
+      "16": "icon16.png",
+      "48": "icon48.png",
+      "128": "icon128.png"
+    },
+    "default_popup": "popup.html",
+    "default_title": "Gemini RTL Settings"
+  },
+  "permissions": ["storage"],
+  "content_scripts": [
+    {
+      "matches": ["https://gemini.google.com/*"],
+      "css": ["style.css"],
+      "js": ["scripts.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "matches": ["https://gemini.google.com/*"],
+      "resources": ["icon16.png", "icon48.png", "icon128.png"]
+    }
+  ]
+}
