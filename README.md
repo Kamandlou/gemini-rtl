@@ -21,3 +21,7 @@ A Chrome extension that adds automatic right-to-left text direction to [Gemini](
 ## Credits
 
 Made with Coffee & Love by Amir Hossein Kamandlou.
+
+## License
+
+MIT. See [LICENSE](LICENSE).
