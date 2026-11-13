@@ -29,7 +29,7 @@
   "web_accessible_resources": [
     {
       "matches": ["https://gemini.google.com/*"],
-      "resources": ["icon16.png", "icon48.png", "icon128.png", "fonts/Vazirmatn[wght].woff2"]
+      "resources": ["icon16.png", "icon48.png", "icon128.png", "fonts/Vazirmatn.woff2"]
     }
   ]
 }

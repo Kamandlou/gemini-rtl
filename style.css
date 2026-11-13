@@ -1,15 +1,30 @@
 /* Gemini RTL applies only to elements marked by this extension. */
 @font-face {
   font-family: "Gemini RTL Vazirmatn";
-  src: url("fonts/Vazirmatn[wght].woff2") format("woff2");
+  src: url("chrome-extension://__MSG_@@extension_id__/fonts/Vazirmatn.woff2") format("woff2");
   font-style: normal;
   font-weight: 100 900;
   font-display: swap;
 }
 
-html.gemini-vazirmatn-enabled body,
-html.gemini-vazirmatn-enabled :is(button, input, textarea, [contenteditable="true"], message-content, user-query, user-query-content, .markdown, .query-text, .query-text-line, p, li, h1, h2, h3, h4, h5, h6, blockquote, label) {
-  font-family: "Gemini RTL Vazirmatn", Arial, sans-serif !important;
+html.gemini-vazirmatn-enabled body :is(
+  main, model-response, user-query, message-content, user-query-content,
+  .markdown, .response-container-content, .query-text, .query-text-line,
+  rich-textarea, .ql-editor
+),
+html.gemini-vazirmatn-enabled body :is(
+  main, model-response, user-query, message-content, user-query-content,
+  .markdown, .response-container-content, .query-text, .query-text-line,
+  rich-textarea, .ql-editor
+) *:not(:is(
+  pre, pre *, code, code *, code-block, code-block *,
+  .cm-editor, .cm-editor *, .katex, .katex *, .MathJax, .MathJax *, math, math *,
+  mat-icon, mat-icon *, .mat-icon, .mat-icon *,
+  .material-icons, .material-symbols-outlined, .material-symbols-rounded,
+  .material-symbols-sharp, .google-symbols, .gds-icon, .gds-icon *,
+  svg, svg *
+)) {
+  font-family: "Gemini RTL Vazirmatn", sans-serif !important;
 }
 
 .gemini-code-math-ltr,
