@@ -1,4 +1,17 @@
 /* Gemini RTL applies only to elements marked by this extension. */
+@font-face {
+  font-family: "Gemini RTL Vazirmatn";
+  src: url("fonts/Vazirmatn[wght].woff2") format("woff2");
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+html.gemini-vazirmatn-enabled body,
+html.gemini-vazirmatn-enabled :is(button, input, textarea, [contenteditable="true"], message-content, user-query, user-query-content, .markdown, .query-text, .query-text-line, p, li, h1, h2, h3, h4, h5, h6, blockquote, label) {
+  font-family: "Gemini RTL Vazirmatn", Arial, sans-serif !important;
+}
+
 .gemini-code-math-ltr,
 .gemini-code-math-ltr * { direction: ltr !important; unicode-bidi: isolate !important; }
 pre.gemini-code-math-ltr, code-block.gemini-code-math-ltr,

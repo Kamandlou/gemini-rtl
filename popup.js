@@ -7,11 +7,13 @@ document.addEventListener('DOMContentLoaded', async () => {
   const toggleAutoResponse = document.getElementById('toggleAutoResponse');
   const toggleAutoInput = document.getElementById('toggleAutoInput');
   const toggleForceCodeMath = document.getElementById('toggleForceCodeMath');
+  const toggleVazirmatn = document.getElementById('toggleVazirmatn');
 
   const defaults = {
     autoDetectResponse: true,
     autoDetectInput: true,
-    forceCodeMathLTR: true
+    forceCodeMathLTR: true,
+    useVazirmatn: false
   };
 
   try {
@@ -19,6 +21,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     toggleAutoResponse.checked = stored.autoDetectResponse;
     toggleAutoInput.checked = stored.autoDetectInput;
     toggleForceCodeMath.checked = stored.forceCodeMathLTR;
+    toggleVazirmatn.checked = stored.useVazirmatn;
   } catch (err) {
     console.error('Gemini RTL: Failed to load settings:', err);
   }
@@ -44,6 +47,14 @@ document.addEventListener('DOMContentLoaded', async () => {
       await chrome.storage.sync.set({ forceCodeMathLTR: toggleForceCodeMath.checked });
     } catch (err) {
       console.error('Gemini RTL: Failed to save forceCodeMathLTR:', err);
+    }
+  });
+
+  toggleVazirmatn.addEventListener('change', async () => {
+    try {
+      await chrome.storage.sync.set({ useVazirmatn: toggleVazirmatn.checked });
+    } catch (err) {
+      console.error('Gemini RTL: Failed to save useVazirmatn:', err);
     }
   });
 });

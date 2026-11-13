@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Gemini RTL",
-  "version": "1.0",
+  "version": "1.1",
   "description": "Smart RTL and LTR support for Google Gemini with math and code isolation",
   "icons": {
     "16": "icon16.png",
@@ -29,7 +29,7 @@
   "web_accessible_resources": [
     {
       "matches": ["https://gemini.google.com/*"],
-      "resources": ["icon16.png", "icon48.png", "icon128.png"]
+      "resources": ["icon16.png", "icon48.png", "icon128.png", "fonts/Vazirmatn[wght].woff2"]
     }
   ]
 }

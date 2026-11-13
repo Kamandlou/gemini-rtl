@@ -10,6 +10,7 @@ A Chrome extension that adds automatic right-to-left text direction to [Gemini](
 - Supports `Ctrl`/`Cmd` + right Shift for RTL and `Ctrl`/`Cmd` + left Shift for LTR while typing.
 - Keeps code and math left-to-right when enabled.
 - Saves preferences with Chrome sync storage.
+- Optionally uses a bundled Vazirmatn font for Gemini text (off by default).
 
 ## Install
 
@@ -25,3 +26,5 @@ Made with Coffee & Love by Amir Hossein Kamandlou.
 ## License
 
 MIT. See [LICENSE](LICENSE).
+
+The bundled Vazirmatn font is licensed separately under the [SIL Open Font License 1.1](fonts/OFL.txt).

@@ -20,6 +20,7 @@
     autoDetectResponse: true,
     autoDetectInput: true,
     forceCodeMathLTR: true,
+    useVazirmatn: false,
     defaultInputDirection: 'auto'
   };
 
@@ -51,6 +52,7 @@
 
   function applyCurrentSettings() {
     document.documentElement.classList.toggle('gemini-code-math-enabled', settings.forceCodeMathLTR);
+    document.documentElement.classList.toggle('gemini-vazirmatn-enabled', settings.useVazirmatn);
     if (!settings.autoDetectResponse) clearMessageFormatting();
     if (!settings.forceCodeMathLTR) clearCodeMathFormatting();
     processAllMessages();
@@ -583,5 +585,5 @@
 
   document.documentElement.classList.toggle('gemini-code-math-enabled', settings.forceCodeMathLTR);
   scheduleBatchProcessing();
-  console.info('Gemini RTL v1.0 initialized successfully.');
+  console.info('Gemini RTL v1.1 initialized successfully.');
 })();
