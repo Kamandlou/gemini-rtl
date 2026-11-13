@@ -1,12 +1,4 @@
 /* Gemini RTL applies only to elements marked by this extension. */
-@font-face {
-  font-family: "Gemini RTL Vazirmatn";
-  src: url("chrome-extension://__MSG_@@extension_id__/fonts/Vazirmatn.woff2") format("woff2");
-  font-style: normal;
-  font-weight: 100 900;
-  font-display: swap;
-}
-
 html.gemini-vazirmatn-enabled body :is(
   main, model-response, user-query, message-content, user-query-content,
   .markdown, .response-container-content, .query-text, .query-text-line,

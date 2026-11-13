@@ -28,6 +28,32 @@
   let manualInputOverride = false;
   let currentInputDirection = 'ltr';
   let isProcessingBatch = false;
+  let vazirmatnLoadPromise;
+
+  function ensureVazirmatnFont() {
+    if (!vazirmatnLoadPromise) {
+      const fontUrl = chrome.runtime.getURL('fonts/Vazirmatn.woff2');
+      vazirmatnLoadPromise = fetch(fontUrl)
+        .then((response) => {
+          if (!response.ok) throw new Error(`Font request failed: ${response.status}`);
+          return response.arrayBuffer();
+        })
+        .then((data) => new FontFace('Gemini RTL Vazirmatn', data, {
+          style: 'normal',
+          weight: '100 900'
+        }).load())
+        .then((face) => {
+          document.fonts.add(face);
+          return true;
+        })
+        .catch((error) => {
+          vazirmatnLoadPromise = undefined;
+          console.error('Gemini RTL: Could not load bundled Vazirmatn font:', error);
+          return false;
+        });
+    }
+    return vazirmatnLoadPromise;
+  }
 
   // Load initial settings
   if (typeof chrome !== 'undefined' && chrome.storage && chrome.storage.sync) {
@@ -52,7 +78,13 @@
 
   function applyCurrentSettings() {
     document.documentElement.classList.toggle('gemini-code-math-enabled', settings.forceCodeMathLTR);
-    document.documentElement.classList.toggle('gemini-vazirmatn-enabled', settings.useVazirmatn);
+    if (settings.useVazirmatn) {
+      ensureVazirmatnFont().then((loaded) => {
+        document.documentElement.classList.toggle('gemini-vazirmatn-enabled', loaded && settings.useVazirmatn);
+      });
+    } else {
+      document.documentElement.classList.remove('gemini-vazirmatn-enabled');
+    }
     if (!settings.autoDetectResponse) clearMessageFormatting();
     if (!settings.forceCodeMathLTR) clearCodeMathFormatting();
     processAllMessages();
@@ -309,18 +341,27 @@
   // ---------------------------------------------------------------------------
   // 5. Message Turn Manual Toggle Button
   // ---------------------------------------------------------------------------
-  const TURN_BUTTON_SVG = `
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M4 6h16M4 12h10M4 18h16" />
-    </svg>
-  `;
+  function createDirectionIcon(paths) {
+    const namespace = 'http://www.w3.org/2000/svg';
+    const svg = document.createElementNS(namespace, 'svg');
+    for (const [name, value] of Object.entries({
+      viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor',
+      'stroke-width': '2', 'stroke-linecap': 'round', 'stroke-linejoin': 'round'
+    })) svg.setAttribute(name, value);
+    paths.forEach((pathData) => {
+      const path = document.createElementNS(namespace, 'path');
+      path.setAttribute('d', pathData);
+      svg.appendChild(path);
+    });
+    return svg;
+  }
 
   function createTurnToggleButton(targetEl) {
     const btn = document.createElement('button');
     btn.type = 'button';
     btn.className = 'gemini-rtl-turn-btn';
     btn.setAttribute('aria-label', 'Toggle RTL/LTR direction');
-    btn.innerHTML = TURN_BUTTON_SVG;
+    btn.appendChild(createDirectionIcon(['M4 6h16M4 12h10M4 18h16']));
 
     const syncBtnState = () => {
       const isRtl = targetEl.getAttribute('dir') === 'rtl' || targetEl.classList.contains('gemini-rtl');
@@ -406,13 +447,6 @@
   // ---------------------------------------------------------------------------
   // 6. Composer Input Direction (Gemini Prompt Input Box)
   // ---------------------------------------------------------------------------
-  const COMPOSER_RTL_SVG = `
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M4 6h16M10 12h10M4 18h16" />
-      <path d="M7 9l-3 3 3 3" />
-    </svg>
-  `;
-
   function getPromptInput() {
     return document.querySelector('rich-textarea .ql-editor[contenteditable="true"]') ||
            document.querySelector('.ql-editor[contenteditable="true"]') ||
@@ -495,7 +529,7 @@
     btn.className = 'gemini-rtl-composer-btn';
     btn.setAttribute('aria-label', 'Toggle input direction');
     btn.setAttribute('title', 'Toggle input direction (Ctrl+Right/Left Shift)');
-    btn.innerHTML = COMPOSER_RTL_SVG;
+    btn.appendChild(createDirectionIcon(['M4 6h16M10 12h10M4 18h16', 'M7 9l-3 3 3 3']));
 
     btn.addEventListener('click', (e) => {
       e.preventDefault();
@@ -585,5 +619,5 @@
 
   document.documentElement.classList.toggle('gemini-code-math-enabled', settings.forceCodeMathLTR);
   scheduleBatchProcessing();
-  console.info('Gemini RTL v1.1 initialized successfully.');
+  console.info('Gemini RTL v1.2 initialized successfully.');
 })();

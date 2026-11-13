@@ -1,8 +1,14 @@
 {
   "manifest_version": 3,
   "name": "Gemini RTL",
-  "version": "1.1",
-  "description": "Smart RTL and LTR support for Google Gemini with math and code isolation",
+  "version": "1.2",
+  "description": "Smart RTL and LTR support for Gemini in Chrome and Firefox, with optional Vazirmatn font",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "gemini-rtl@kamandlou.github.io",
+      "data_collection_permissions": { "required": ["none"] }
+    }
+  },
   "icons": {
     "16": "icon16.png",
     "48": "icon48.png",
