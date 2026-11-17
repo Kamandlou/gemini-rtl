@@ -19,13 +19,10 @@ A Chrome and Firefox extension that adds automatic right-to-left text direction 
 3. Click **Load unpacked** and select this repository's folder.
 4. Open [Gemini](https://gemini.google.com/) or reload an existing Gemini tab.
 
-## Test in Firefox
+## Install in Firefox
 
-1. Open `about:debugging#/runtime/this-firefox`.
-2. Click **Load Temporary Add-on** and select `manifest.json` from this folder.
-3. Open [Gemini](https://gemini.google.com/) or reload an existing Gemini tab.
-
-Temporary add-ons are removed when Firefox closes. A permanent Firefox installation requires a signed add-on package.
+1. Install [Gemini RTL from Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/gemini-web-rtl/).
+2. Open [Gemini](https://gemini.google.com/) or reload an existing Gemini tab.
 
 ## Credits
 
