@@ -663,5 +663,5 @@
 
   document.documentElement.classList.toggle('gemini-code-math-enabled', settings.forceCodeMathLTR);
   scheduleBatchProcessing();
-  console.info('Gemini RTL v1.2 initialized successfully.');
+  console.info('Gemini RTL v1.3 initialized successfully.');
 })();
