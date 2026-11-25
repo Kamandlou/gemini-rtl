@@ -1,21 +1,22 @@
 /* Gemini RTL applies only to elements marked by this extension. */
-html.gemini-vazirmatn-enabled body :is(
-  main, model-response, user-query, message-content, user-query-content,
-  .markdown, .response-container-content, .query-text, .query-text-line,
-  rich-textarea, .ql-editor
-),
-html.gemini-vazirmatn-enabled body :is(
-  main, model-response, user-query, message-content, user-query-content,
-  .markdown, .response-container-content, .query-text, .query-text-line,
-  rich-textarea, .ql-editor
-) *:not(:is(
-  pre, pre *, code, code *, code-block, code-block *,
-  .cm-editor, .cm-editor *, .katex, .katex *, .MathJax, .MathJax *, math, math *,
-  mat-icon, mat-icon *, .mat-icon, .mat-icon *,
+/* Apply the font to chat text, never to layout containers or icon wrappers. */
+html.gemini-vazirmatn-enabled :is(
+  message-content, user-query-content, .markdown,
+  .response-container-content, .query-text, .query-text-line
+) :is(p, li, h1, h2, h3, h4, h5, h6, blockquote, th, td, strong, em, a, span):not(:is(
+  mat-icon, .mat-icon, .google-symbols, .lumi-symbols,
   .material-icons, .material-symbols-outlined, .material-symbols-rounded,
-  .material-symbols-sharp, .google-symbols, .gds-icon, .gds-icon *,
-  svg, svg *
-)) {
+  .material-symbols-sharp, [class*="icon-"], [data-mat-icon-name],
+  [fonticon], [role="img"], .notranslate,
+  pre *, code *, code-block *, .cm-editor *, .katex *, .MathJax *, math *
+)):not(:has(:is(
+  mat-icon, .mat-icon, .google-symbols, .lumi-symbols,
+  .material-icons, [class*="material-symbol"], [class*="icon-"],
+  [data-mat-icon-name], [fonticon], [role="img"]
+))),
+html.gemini-vazirmatn-enabled :is(
+  .query-text, .query-text-line, .ql-editor, [contenteditable="true"]
+):not(:has(:is(mat-icon, .mat-icon, .google-symbols, [role="img"]))) {
   font-family: "Gemini RTL Vazirmatn", sans-serif !important;
 }
 
