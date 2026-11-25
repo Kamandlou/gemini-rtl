@@ -29,6 +29,46 @@
   let currentInputDirection = 'ltr';
   let isProcessingBatch = false;
   let vazirmatnLoadPromise;
+  const iconOriginalFonts = new WeakMap();
+  const iconCandidatesChecked = new WeakSet();
+  const ICON_CANDIDATE_SELECTOR =
+    'mat-icon, i, [fonticon], [data-mat-icon-name], [role="img"], [aria-hidden="true"], ' +
+    '[class*="icon"], [class*="symbol"], [class*="glyph"], [class*="ligature"]';
+
+  function protectIconFonts() {
+    const candidates = [...document.querySelectorAll(ICON_CANDIDATE_SELECTOR)]
+      .filter((element) => !iconCandidatesChecked.has(element));
+    if (!candidates.length) return;
+
+    const root = document.documentElement;
+    const wasEnabled = root.classList.contains('gemini-vazirmatn-enabled');
+    root.classList.remove('gemini-vazirmatn-enabled');
+
+    candidates.forEach((element) => {
+      iconCandidatesChecked.add(element);
+      const originalFont = getComputedStyle(element).fontFamily;
+      if (!originalFont) return;
+      iconOriginalFonts.set(element, {
+        value: element.style.getPropertyValue('font-family'),
+        priority: element.style.getPropertyPriority('font-family')
+      });
+      element.style.setProperty('font-family', originalFont, 'important');
+      element.dataset.geminiProtectedIconFont = 'true';
+    });
+
+    if (wasEnabled) root.classList.add('gemini-vazirmatn-enabled');
+  }
+
+  function restoreIconFonts() {
+    document.querySelectorAll('[data-gemini-protected-icon-font]').forEach((element) => {
+      const original = iconOriginalFonts.get(element);
+      if (original?.value) element.style.setProperty('font-family', original.value, original.priority);
+      else element.style.removeProperty('font-family');
+      delete element.dataset.geminiProtectedIconFont;
+      iconOriginalFonts.delete(element);
+      iconCandidatesChecked.delete(element);
+    });
+  }
 
   function ensureVazirmatnFont() {
     if (!vazirmatnLoadPromise) {
@@ -79,11 +119,14 @@
   function applyCurrentSettings() {
     document.documentElement.classList.toggle('gemini-code-math-enabled', settings.forceCodeMathLTR);
     if (settings.useVazirmatn) {
+      protectIconFonts();
       ensureVazirmatnFont().then((loaded) => {
+        if (loaded && settings.useVazirmatn) protectIconFonts();
         document.documentElement.classList.toggle('gemini-vazirmatn-enabled', loaded && settings.useVazirmatn);
       });
     } else {
       document.documentElement.classList.remove('gemini-vazirmatn-enabled');
+      restoreIconFonts();
     }
     if (!settings.autoDetectResponse) clearMessageFormatting();
     if (!settings.forceCodeMathLTR) clearCodeMathFormatting();
@@ -592,6 +635,7 @@
         processAllMessages();
         updateComposerButton();
         attachAllTurnActionButtons();
+        if (settings.useVazirmatn) protectIconFonts();
       } catch (err) {
         console.error('Gemini RTL: Error during batch processing:', err);
       } finally {
